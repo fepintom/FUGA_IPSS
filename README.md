@@ -24,12 +24,12 @@ Cada estudiante recibe una **probabilidad de deserción** y sus **principales fa
 
 | Fase CRISP-DM | Estado |
 |---|---|
-| 1. Comprensión del negocio | ✅ Completada |
-| 2. Comprensión de los datos | ✅ Completada |
-| 3. Preparación de los datos | ✅ Completada, con etiqueta provisional |
-| 4. Modelado | 🟡 Modelo de referencia; la versión definitiva depende de las solicitudes R1 y R2 |
-| 5. Evaluación | 🟡 Preliminar: métricas de negocio, estabilidad y equidad |
-| 6. Despliegue | ⏳ Propuesta inicial |
+| 1. Comprensión del negocio | Completada |
+| 2. Comprensión de los datos | Completada |
+| 3. Preparación de los datos | Completada, con etiqueta provisional |
+| 4. Modelado | Modelo de referencia; la versión definitiva depende de las solicitudes R1 y R2 |
+| 5. Evaluación | Preliminar: métricas de negocio, estabilidad y equidad |
+| 6. Despliegue | Propuesta inicial |
 
 ### Hallazgos principales
 
