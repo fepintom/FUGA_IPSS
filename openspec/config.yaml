@@ -1,0 +1,54 @@
+schema: spec-driven
+
+context: |
+  Language: es
+  All artifacts must be written in es.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+
+  Proyecto: FUGA IPSS — detección temprana de deserción (fuga) de estudiantes
+  en el Instituto Profesional San Sebastián (InnovaLab).
+  Objetivo: identificar a tiempo a los alumnos con riesgo de desertar para
+  priorizar acciones de retención.
+
+  Stack: Python, Jupyter, pandas, numpy, matplotlib (scikit-learn para modelos).
+  Pipeline de producción en src/fuga_ipss/ (python -m fuga_ipss.pipeline);
+  todo supuesto de negocio va en src/fuga_ipss/config.py.
+
+  Fuentes de datos (carpeta data/raw/, NO versionadas):
+  - encuesta_caracterizacion_2024/2025/2026.xlsx: encuesta de caracterización
+    de ingreso (incluye escalas como disposición hacia la educación superior).
+  - rendimiento_academico_2024-2025.xlsx: notas / rendimiento por alumno.
+  - Contactabilidad_SGE.xlsx: log de interacciones funcionario-alumno
+    (RUT_ALUMNO, FECHA_COMUNICO, Asunto, TIPO_COMUNICACION, CODCARR).
+    Ya limpiado en data/interim/contactabilidad_log_limpio.pkl (~38.6k
+    interacciones, ~6.5k alumnos, ene-2024 a ago-2026). Es una tabla de eventos: debe
+    agregarse a nivel alumno antes de modelar.
+
+  Restricciones:
+  - Los datos contienen RUT y texto libre de estudiantes: nunca versionar
+    datos, anonimizar/pseudonimizar RUT en salidas, no exponer PII en reportes.
+  - Evitar fuga de información temporal (usar solo datos disponibles antes
+    del momento de predicción).
+  - La llave de unión entre fuentes es el RUT del alumno.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always state what is out of scope
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

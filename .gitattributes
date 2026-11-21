@@ -1,0 +1,5 @@
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb
+*.docx binary
+*.xlsx binary
+*.pdf binary
