@@ -215,10 +215,10 @@ def _figuras(curva, deciles, tasa_base, fact, comparacion_b):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    NAVY, NEGRO, BLANCO = "#1F2A44", "#000000", "#FFFFFF"
     plt.rcParams.update({"figure.dpi": 150, "font.size": 9, "axes.spines.top": False,
                          "axes.spines.right": False, "axes.edgecolor": NEGRO,
                          "text.color": NEGRO, "axes.labelcolor": NEGRO, "xtick.color": NEGRO, "ytick.color": NEGRO})
-    NAVY, NEGRO, BLANCO = "#1F2A44", "#000000", "#FFFFFF"
     FIGURES.mkdir(parents=True, exist_ok=True)
 
     fig, ax = plt.subplots(figsize=(6.2, 3.6))
