@@ -1,7 +1,7 @@
 # FUGA IPSS · Detección temprana de deserción estudiantil
 
 **InnovaLab · Instituto Profesional San Sebastián**
-Responsable analítico: Fernando Pinto Montecinos · Metodología: CRISP-DM · Versión 0.3 (noviembre 2026)
+Responsable analítico: Fernando Pinto Montecinos · Metodología: CRISP-DM · Versión 0.4 (noviembre 2026)
 
 ---
 
@@ -27,8 +27,8 @@ Cada estudiante recibe una **probabilidad de deserción** y sus **principales fa
 | 1. Comprensión del negocio | ✅ Completada |
 | 2. Comprensión de los datos | ✅ Completada |
 | 3. Preparación de los datos | ✅ Completada, con etiqueta provisional |
-| 4. Modelado | 🟡 Diseñado; la versión definitiva depende de las solicitudes R1 y R2 |
-| 5. Evaluación | ⏳ Criterios definidos de antemano |
+| 4. Modelado | 🟡 Modelo de referencia; la versión definitiva depende de las solicitudes R1 y R2 |
+| 5. Evaluación | 🟡 Preliminar: métricas de negocio, estabilidad y equidad |
 | 6. Despliegue | ⏳ Propuesta inicial |
 
 ### Hallazgos principales
@@ -37,6 +37,19 @@ Cada estudiante recibe una **probabilidad de deserción** y sus **principales fa
 - **La tasa depende de cuánto tiempo lleva cada cohorte**: 45% en 2024 (~31 meses), 22% en 2025 (~18 meses) y 31% en 2026 (~7 meses). La cohorte 2026 tiene más deserción que la 2025 con menos tiempo, lo que sugiere abandono muy temprano o estudiantes que nunca iniciaron clases.
 - **La conducta académica anticipa la deserción**: más de la mitad de las evaluaciones de los eliminados tienen nota mínima, contra ~16% en los vigentes.
 - **El registro de contactos tiene señal, pero también trampas**: varias señales (el estudiante dice que desiste, contactos de retención) ocurren *cuando* ya se está yendo. Se excluyen como predictores para que el modelo alerte a tiempo y no solo confirme lo que ya pasó.
+
+### Resultados preliminares de la predicción
+
+| | Modelo A · al ingreso (solo encuesta) | Modelo B · cierre del 1er periodo (+ notas y contactos) |
+|---|---|---|
+| Validación | Entrenado con 2024–2025, aplicado a la cohorte 2026 | Validación cruzada, cohorte 2024 |
+| Desertores alcanzados contactando al 20% de mayor riesgo | **25%** (128 de 505; al azar: 20%) | **41%** (A en la misma cohorte: 24%) |
+| % de alertados que efectivamente desertó | 39% (promedio de la cohorte: 31%) | **85%** |
+| AUC | 0,57 | 0,75 |
+
+**Lectura:** la encuesta de ingreso prioriza mejor que el azar, pero poco. La conducta del primer periodo casi duplica la capacidad de anticipar la deserción, así que el producto con más valor es una **alerta al cierre del primer periodo**. El modelo de ingreso además alerta de forma desigual por jornada, sexo y nacionalidad, y eso debe corregirse antes de usarlo con estudiantes individuales. El detalle está en el [informe del proyecto](docs/02_informe_proyecto/).
+
+![Desertores alcanzados según cuántos estudiantes se contacten](reports/figures/captura_desertores_2026.png)
 
 ### Qué falta para el modelo definitivo
 
@@ -69,10 +82,12 @@ FUGA_IPSS/
 │   ├── encuesta.py        #   unificación de cohortes
 │   ├── rendimiento.py     #   indicadores académicos por estudiante
 │   ├── objetivo.py        #   variable objetivo y tabla base
-│   └── pipeline.py        #   ejecución de punta a punta
+│   ├── pipeline.py        #   ejecución de punta a punta
+│   ├── features.py        #   selección de predictores desde el diccionario
+│   └── modelo.py          #   entrenamiento y evaluación de negocio y equidad
 ├── tests/                 # Pruebas con datos sintéticos
 ├── models/                # Modelos entrenados (no versionados)
-├── reports/figures/       # Gráficos generados
+├── reports/               # Resultados agregados del modelo y gráficos
 └── openspec/              # Especificaciones de cambios (desarrollo guiado por specs)
 ```
 
@@ -85,6 +100,7 @@ nbstripout --install          # el notebook se versiona siempre sin salidas
 
 # Copiar los archivos del IP en data/raw/ y luego:
 python -m fuga_ipss.pipeline  # genera data/interim y data/processed
+python -m fuga_ipss.modelo    # entrena, evalúa y genera reports/ y la lista priorizada
 pytest                        # pruebas
 ```
 

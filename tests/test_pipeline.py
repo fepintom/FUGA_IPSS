@@ -94,3 +94,22 @@ def test_rendimiento():
     assert agg.loc["EST-1", "pct_nota_minima"] == 0.5 and agg.loc["EST-1", "cursa_2025"]
     assert rendimiento.agregar_por_estudiante(rendimiento.preparar(raw), hasta=pd.Timestamp("2025-01-01")
                                               ).loc["EST-1", "n_evaluaciones"] == 1
+
+
+def test_seleccion_de_predictores_excluye_atributos_protegidos():
+    from fuga_ipss import features
+    sel = features.seleccionar_variables()
+    sens = sel["Sensibilidad"].fillna("—").astype(str)
+    assert (sens.isin(["—"]) | sens.str.contains("socioeconómica")).all()
+    protegidos = ["G00Q02", "G01Q03", "G01Q07", "G02Q02", "G01Q75", "G01Q82", "G01Q13"]
+    assert not set(protegidos) & set(sel["Variable"])
+    assert (sel[["En 2024", "En 2025", "En 2026"]] == "Sí").all().all()
+
+
+def test_metricas_de_negocio():
+    import numpy as np
+    from fuga_ipss import modelo
+    y = np.array([1, 1, 0, 0, 0, 0, 0, 0, 0, 0])
+    s = np.array([.9, .1, .8, .7, .6, .5, .4, .3, .2, .05])
+    m = modelo.metricas(y, s)
+    assert m["recall_top20"] == 0.5 and m["precision_top20"] == 0.5 and m["lift_top20"] == 2.5

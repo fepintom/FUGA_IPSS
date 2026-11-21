@@ -1,0 +1,369 @@
+{
+  "fecha": "2026-11-21",
+  "version": "0.4.0-preliminar",
+  "etiqueta": "DESERCION (ELIMINADO o SUSPENDIDO)",
+  "supuesto_fecha_corte": "2026-08-31",
+  "predictores": {
+    "n": 178,
+    "numericos": 39,
+    "categoricos": 139,
+    "variables_diccionario": 176
+  },
+  "validacion_temporal": {
+    "entrenamiento": "cohortes 2024-2025",
+    "prueba": "cohorte 2026",
+    "n_entrenamiento": 1645,
+    "modelos": {
+      "Regresión logística": {
+        "n": 1638,
+        "desertores": 505,
+        "tasa_base": 0.3083028083028083,
+        "roc_auc": 0.5701135162059895,
+        "pr_auc": 0.3702115908712922,
+        "recall_top10": 0.1306930693069307,
+        "precision_top10": 0.4024390243902439,
+        "lift_top10": 1.3053368751509298,
+        "recall_top20": 0.25346534653465347,
+        "precision_top20": 0.3902439024390244,
+        "lift_top20": 1.2657812122675682,
+        "recall_top30": 0.3702970297029703,
+        "precision_top30": 0.38085539714867617,
+        "lift_top30": 1.235328991147587
+      },
+      "Gradient boosting": {
+        "n": 1638,
+        "desertores": 505,
+        "tasa_base": 0.3083028083028083,
+        "roc_auc": 0.5639142555032203,
+        "pr_auc": 0.3460076376725856,
+        "recall_top10": 0.12277227722772277,
+        "precision_top10": 0.3780487804878049,
+        "lift_top10": 1.2262255493842067,
+        "recall_top20": 0.2316831683168317,
+        "precision_top20": 0.3567073170731707,
+        "lift_top20": 1.157003139338324,
+        "recall_top30": 0.35247524752475246,
+        "precision_top30": 0.3625254582484725,
+        "lift_top30": 1.1758746546752434
+      }
+    },
+    "elegido": "Regresión logística",
+    "ic95_elegido": {
+      "roc_auc": [
+        0.5393849033479894,
+        0.6009922199882223
+      ],
+      "recall_top20": [
+        0.21744287535549672,
+        0.28133018634882895
+      ],
+      "precision_top20": [
+        0.32621951219512196,
+        0.43902439024390244
+      ]
+    }
+  },
+  "desercion_por_decil_2026": {
+    "1": 0.4024390243902439,
+    "2": 0.3780487804878049,
+    "3": 0.3597560975609756,
+    "4": 0.3312883435582822,
+    "5": 0.25609756097560976,
+    "6": 0.3475609756097561,
+    "7": 0.3128834355828221,
+    "8": 0.21951219512195122,
+    "9": 0.20121951219512196,
+    "10": 0.27439024390243905
+  },
+  "cv_dentro_de_cohorte": {
+    "2024": {
+      "n": 595,
+      "desertores": 268,
+      "tasa_base": 0.4504201680672269,
+      "roc_auc": 0.6283947236295586,
+      "pr_auc": 0.5629733618691186,
+      "recall_top10": 0.13805970149253732,
+      "precision_top10": 0.6166666666666667,
+      "lift_top10": 1.3690920398009951,
+      "recall_top20": 0.26865671641791045,
+      "precision_top20": 0.6050420168067226,
+      "lift_top20": 1.3432835820895521,
+      "recall_top30": 0.3694029850746269,
+      "precision_top30": 0.5561797752808989,
+      "lift_top30": 1.234802113030354
+    },
+    "2025": {
+      "n": 1050,
+      "desertores": 226,
+      "tasa_base": 0.21523809523809523,
+      "roc_auc": 0.527703196150872,
+      "pr_auc": 0.23463346991070708,
+      "recall_top10": 0.12389380530973451,
+      "precision_top10": 0.26666666666666666,
+      "lift_top10": 1.2389380530973453,
+      "recall_top20": 0.23893805309734514,
+      "precision_top20": 0.2571428571428571,
+      "lift_top20": 1.1946902654867255,
+      "recall_top30": 0.33185840707964603,
+      "precision_top30": 0.23809523809523808,
+      "lift_top30": 1.1061946902654867
+    },
+    "2026": {
+      "n": 1638,
+      "desertores": 505,
+      "tasa_base": 0.3083028083028083,
+      "roc_auc": 0.5975164506741937,
+      "pr_auc": 0.3951268381518455,
+      "recall_top10": 0.14455445544554454,
+      "precision_top10": 0.4451219512195122,
+      "lift_top10": 1.443781695242695,
+      "recall_top20": 0.2712871287128713,
+      "precision_top20": 0.4176829268292683,
+      "lift_top20": 1.3547814537551315,
+      "recall_top30": 0.39801980198019804,
+      "precision_top30": 0.4093686354378819,
+      "lift_top30": 1.3278135145490109
+    }
+  },
+  "factores": {
+    "riesgo": [
+      {
+        "variable": "carrera",
+        "factor": "Carrera = TECNICO EN CONECTIVIDAD Y REDES",
+        "coef": 0.4417503772650785,
+        "odds_ratio": 1.5554274219225273
+      },
+      {
+        "variable": "G03Q48",
+        "factor": "¿Cuentas con experiencia laboral relacionada a la carrera en que te matriculaste? = Sí, en trabajos de tiempo completo",
+        "coef": 0.31842209343107575,
+        "odds_ratio": 1.3749564988678853
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = TECNICO EN CIENCIA DE DATOS",
+        "coef": 0.3059358549886671,
+        "odds_ratio": 1.3578952015511545
+      },
+      {
+        "variable": "G00Q12[SQ002]",
+        "factor": "¿Cuál es el máximo nivel educacional alcanzado por tus padres o figuras maternas/paternas? [Madre o madrastra] = Ed. Básica completa",
+        "coef": 0.23235595099141132,
+        "odds_ratio": 1.261568705548208
+      },
+      {
+        "variable": "G03Q55",
+        "factor": "¿Cuánto se relaciona tu educación previa con la carrera en que te matriculaste? = Se relacionan mucho",
+        "coef": 0.2190513709210585,
+        "odds_ratio": 1.2448952264593423
+      },
+      {
+        "variable": "G02Q20",
+        "factor": "En relación a la pregunta anterior ¿En cuál de las siguientes situaciones se encuentra… = No he encontrado un trabajo aún, pero lo estoy buscando",
+        "coef": 0.21675675372219036,
+        "odds_ratio": 1.2420419433101553
+      },
+      {
+        "variable": "G04Q39[SQ010]",
+        "factor": "¿Por qué escogiste esta institución? [Por la ubicación y accesibilidad de sus sedes] = No",
+        "coef": 0.2102166981165612,
+        "odds_ratio": 1.2339454246364439
+      },
+      {
+        "variable": "G02Q20",
+        "factor": "En relación a la pregunta anterior ¿En cuál de las siguientes situaciones se encuentra… = Tengo un trabajo que NO se relaciona con la carrera que me matriculé",
+        "coef": 0.20630605703216437,
+        "odds_ratio": 1.2291293301092743
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = TECNICO EN FARMACIA",
+        "coef": 0.2047012174106965,
+        "odds_ratio": 1.2271583566315936
+      },
+      {
+        "variable": "G03Q46",
+        "factor": "Gracias a convenios institucionales y el Acuerdo Nacional de Articulación, los… = Me matriculé en una carrera NO relacionada a mi especialidad",
+        "coef": 0.2008315603651513,
+        "odds_ratio": 1.2224188506963307
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = TECNICO EN RECURSOS HUMANOS",
+        "coef": 0.2005786551139277,
+        "odds_ratio": 1.2221097336401059
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = INGENIERIA EN RECURSOS HUMANOS",
+        "coef": 0.1970838949034772,
+        "odds_ratio": 1.2178462075102405
+      }
+    ],
+    "protectores": [
+      {
+        "variable": "carrera",
+        "factor": "Carrera = CONTINUIDAD INGENIERIA INFORMATICA",
+        "coef": -0.5096084620426614,
+        "odds_ratio": 0.6007307416591711
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = CONTINUIDAD INGENIERIA  CIBERSEGURIDAD",
+        "coef": -0.37931991932002007,
+        "odds_ratio": 0.6843266483266802
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = CONTINUIDAD INGENIERIA CONECTIVIDAD Y REDES",
+        "coef": -0.32880264155992545,
+        "odds_ratio": 0.7197850583863683
+      },
+      {
+        "variable": "G03Q48",
+        "factor": "¿Cuentas con experiencia laboral relacionada a la carrera en que te matriculaste? = Sí, cuento con experiencia laboral relacionada",
+        "coef": -0.2604468747970398,
+        "odds_ratio": 0.770707099259563
+      },
+      {
+        "variable": "G02Q20",
+        "factor": "En relación a la pregunta anterior ¿En cuál de las siguientes situaciones se encuentra… = Trabajo a tiempo completo",
+        "coef": -0.25943400070213035,
+        "odds_ratio": 0.7714881239882514
+      },
+      {
+        "variable": "G02Q20",
+        "factor": "En relación a la pregunta anterior ¿En cuál de las siguientes situaciones se encuentra… = Sin respuesta",
+        "coef": -0.25427221367471037,
+        "odds_ratio": 0.7754806768674823
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = CONTABILIDAD GENERAL",
+        "coef": -0.23503920443517437,
+        "odds_ratio": 0.7905398563526514
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = TECNICO EN PROGRAMACION Y ANALISIS DE SISTEMAS",
+        "coef": -0.2212430688322351,
+        "odds_ratio": 0.8015218316347107
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = CONTINUIDAD INGENIERIA INDUSTRIAL",
+        "coef": -0.20007046404317666,
+        "odds_ratio": 0.8186730640313725
+      },
+      {
+        "variable": "G04Q39[SQ010]",
+        "factor": "¿Por qué escogiste esta institución? [Por la ubicación y accesibilidad de sus sedes] = Sí",
+        "coef": -0.19979748411166803,
+        "odds_ratio": 0.8188965758540528
+      },
+      {
+        "variable": "carrera",
+        "factor": "Carrera = INGENIERIA EN INFORMATICA",
+        "coef": -0.18615492768673084,
+        "odds_ratio": 0.8301449725783514
+      },
+      {
+        "variable": "G01Q26",
+        "factor": "¿A qué área o rubro pertenece la empresa donde trabajas? = Actividades financieras y de seguros",
+        "coef": -0.18453524852286862,
+        "odds_ratio": 0.8314906305663452
+      }
+    ]
+  },
+  "equidad_2026": {
+    "sexo": [
+      {
+        "grupo": "H (hombre)",
+        "n": 833,
+        "tasa_desercion": 0.28811524609843936,
+        "tasa_alerta": 0.13925570228091236,
+        "recall": 0.2
+      },
+      {
+        "grupo": "M (mujer)",
+        "n": 804,
+        "tasa_desercion": 0.3283582089552239,
+        "tasa_alerta": 0.263681592039801,
+        "recall": 0.30303030303030304
+      }
+    ],
+    "nacionalidad": [
+      {
+        "grupo": "Chilena",
+        "n": 1418,
+        "tasa_desercion": 0.3138222849083216,
+        "tasa_alerta": 0.19393511988716503,
+        "recall": 0.23820224719101124
+      },
+      {
+        "grupo": "Otra",
+        "n": 220,
+        "tasa_desercion": 0.2727272727272727,
+        "tasa_alerta": 0.2409090909090909,
+        "recall": 0.36666666666666664
+      }
+    ],
+    "jornada": [
+      {
+        "grupo": "Online",
+        "n": 1117,
+        "tasa_desercion": 0.2981199641897941,
+        "tasa_alerta": 0.13428827215756492,
+        "recall": 0.1891891891891892
+      },
+      {
+        "grupo": "Vespertina",
+        "n": 404,
+        "tasa_desercion": 0.32425742574257427,
+        "tasa_alerta": 0.3688118811881188,
+        "recall": 0.3969465648854962
+      },
+      {
+        "grupo": "Diurna",
+        "n": 117,
+        "tasa_desercion": 0.3504273504273504,
+        "tasa_alerta": 0.24786324786324787,
+        "recall": 0.3170731707317073
+      }
+    ]
+  },
+  "modelo_b_2024": {
+    "A": {
+      "n": 561,
+      "desertores": 234,
+      "tasa_base": 0.41711229946524064,
+      "roc_auc": 0.5841109281476254,
+      "pr_auc": 0.48058728376153503,
+      "recall_top10": 0.13675213675213677,
+      "precision_top10": 0.5714285714285714,
+      "lift_top10": 1.36996336996337,
+      "recall_top20": 0.23931623931623933,
+      "precision_top20": 0.5,
+      "lift_top20": 1.1987179487179487,
+      "recall_top30": 0.3418803418803419,
+      "precision_top30": 0.47619047619047616,
+      "lift_top30": 1.1416361416361416
+    },
+    "B": {
+      "n": 561,
+      "desertores": 234,
+      "tasa_base": 0.41711229946524064,
+      "roc_auc": 0.7453801719856766,
+      "pr_auc": 0.7349567875384648,
+      "recall_top10": 0.2264957264957265,
+      "precision_top10": 0.9464285714285714,
+      "lift_top10": 2.269001831501831,
+      "recall_top20": 0.405982905982906,
+      "precision_top20": 0.8482142857142857,
+      "lift_top20": 2.0335393772893773,
+      "recall_top30": 0.5256410256410257,
+      "precision_top30": 0.7321428571428571,
+      "lift_top30": 1.7552655677655677
+    }
+  }
+}
