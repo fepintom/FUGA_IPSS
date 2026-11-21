@@ -216,47 +216,48 @@ def _figuras(curva, deciles, tasa_base, fact, comparacion_b):
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     plt.rcParams.update({"figure.dpi": 150, "font.size": 9, "axes.spines.top": False,
-                         "axes.spines.right": False, "axes.edgecolor": "#888888"})
-    ROJO, GRIS, AZUL = "#B8433E", "#9AA3AE", "#4C78A8"
+                         "axes.spines.right": False, "axes.edgecolor": NEGRO,
+                         "text.color": NEGRO, "axes.labelcolor": NEGRO, "xtick.color": NEGRO, "ytick.color": NEGRO})
+    NAVY, NEGRO, BLANCO = "#1F2A44", "#000000", "#FFFFFF"
     FIGURES.mkdir(parents=True, exist_ok=True)
 
     fig, ax = plt.subplots(figsize=(6.2, 3.6))
-    ax.plot(curva["pct_contactado"] * 100, curva["pct_desertores_capturados"] * 100, color=ROJO, lw=2,
+    ax.plot(curva["pct_contactado"] * 100, curva["pct_desertores_capturados"] * 100, color=NAVY, lw=2.2,
             label="Con el modelo (orden por riesgo)")
-    ax.plot([0, 100], [0, 100], color=GRIS, ls="--", lw=1.2, label="Sin modelo (orden al azar)")
+    ax.plot([0, 100], [0, 100], color=NEGRO, ls="--", lw=1.0, label="Sin modelo (orden al azar)")
     for k in (10, 20, 30):
         v = np.interp(k / 100, curva["pct_contactado"], curva["pct_desertores_capturados"]) * 100
-        ax.scatter([k], [v], color=ROJO, zorder=3, s=18)
+        ax.scatter([k], [v], color=NAVY, zorder=3, s=18)
         ax.annotate(f"{v:.0f}%", (k, v), textcoords="offset points", xytext=(-6, 7), fontsize=8.5,
-                    color=ROJO, fontweight="bold", ha="right")
+                    color=NAVY, fontweight="bold", ha="right")
     ax.set_xlabel("% de la cohorte 2026 contactada, de mayor a menor riesgo")
     ax.set_ylabel("% de desertores alcanzados")
-    ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.grid(color="#EEEEEE"); ax.set_axisbelow(True)
+    ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.set_axisbelow(True)
     ax.legend(frameon=False, loc="lower right")
     ax.set_title("Desertores alcanzados según cuántos estudiantes se contacten", loc="left", fontsize=10)
     fig.tight_layout(); fig.savefig(FIGURES / "captura_desertores_2026.png"); plt.close(fig)
 
     fig, ax = plt.subplots(figsize=(6.2, 3.2))
     ax.bar(deciles.index.astype(str), deciles.values * 100,
-           color=[ROJO if i <= 2 else GRIS for i in deciles.index.astype(int)], width=0.65)
-    ax.axhline(tasa_base * 100, color="#333333", ls="--", lw=1)
+           color=[NAVY if i <= 2 else BLANCO for i in deciles.index.astype(int)], edgecolor=NAVY, lw=1, width=0.65)
+    ax.axhline(tasa_base * 100, color=NEGRO, ls="--", lw=1)
     ax.text(9.6, tasa_base * 100 + 1.5, f"Promedio {tasa_base*100:.0f}%", ha="right", fontsize=8.5)
     for x, v in enumerate(deciles.values * 100):
         ax.text(x, v + 1, f"{v:.0f}%", ha="center", fontsize=8)
     ax.set_xlabel("Decil de riesgo (1 = 10% de mayor riesgo)")
     ax.set_ylabel("% que desertó")
     ax.set_title("Deserción real por decil de riesgo · cohorte 2026", loc="left", fontsize=10)
-    ax.yaxis.grid(True, color="#EEEEEE"); ax.set_axisbelow(True)
+    ax.set_axisbelow(True)
     fig.tight_layout(); fig.savefig(FIGURES / "desercion_por_decil_2026.png"); plt.close(fig)
 
     r = pd.DataFrame(fact["riesgo"][:8]).iloc[::-1]
     p = pd.DataFrame(fact["protectores"][:8])
     fig, axs = plt.subplots(2, 1, figsize=(7.2, 6.0))
-    for ax, d, col, tit in ((axs[0], r, ROJO, "Factores asociados a MÁS riesgo"),
-                            (axs[1], p.iloc[::-1], AZUL, "Factores asociados a MENOS riesgo")):
+    for ax, d, col, tit in ((axs[0], r, NAVY, "Factores asociados a MÁS riesgo"),
+                            (axs[1], p.iloc[::-1], BLANCO, "Factores asociados a MENOS riesgo")):
         lab = [_corta(t) for t in d["factor"]]
-        ax.barh(lab, d["odds_ratio"] - 1, left=1, color=col, height=0.6)
-        ax.axvline(1, color="#333333", lw=0.8)
+        ax.barh(lab, d["odds_ratio"] - 1, left=1, color=col, edgecolor=NAVY, lw=1, height=0.6)
+        ax.axvline(1, color=NEGRO, lw=0.8)
         ax.set_title(tit, loc="left", fontsize=9.5); ax.tick_params(axis="y", labelsize=7.5)
         ax.set_xlabel("Razón de odds (1 = sin efecto)", fontsize=8)
     fig.tight_layout(); fig.savefig(FIGURES / "factores_riesgo.png"); plt.close(fig)
@@ -265,7 +266,7 @@ def _figuras(curva, deciles, tasa_base, fact, comparacion_b):
         fig, ax = plt.subplots(figsize=(5.8, 3.2))
         lab = ["A · Solo encuesta\n(al ingreso)", "B · Encuesta + notas y\ncontactos del 1er periodo"]
         vals = [comparacion_b["A"]["recall_top20"] * 100, comparacion_b["B"]["recall_top20"] * 100]
-        ax.bar(lab, vals, color=[GRIS, ROJO], width=0.5)
+        ax.bar(lab, vals, color=[BLANCO, NAVY], edgecolor=NAVY, lw=1.2, width=0.5)
         for x, v in enumerate(vals):
             ax.text(x, v + 1.5, f"{v:.0f}%", ha="center", fontweight="bold")
         ax.set_ylim(0, 100); ax.set_ylabel("% de desertores alcanzados\nal contactar al 20% de mayor riesgo", fontsize=8)
